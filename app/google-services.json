@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "884650663419",
+    "firebase_url": "https://uber-simcoder-318c9.firebaseio.com",
+    "project_id": "uber-simcoder-318c9",
+    "storage_bucket": "uber-simcoder-318c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884650663419:android:a71ef0883445c98a",
+        "android_client_info": {
+          "package_name": "com.zainco.uber_simcoder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884650663419-bmt54366fv508ktdn4e0c9ivevd264fq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zainco.uber_simcoder",
+            "certificate_hash": "eb517143853645d02b0e2349a46ddf2d3cc152e8"
+          }
+        },
+        {
+          "client_id": "884650663419-lt6dhb7vp4pejenflbvmmsv371amnisj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKs98_TPdQ1AB6L7IJnTFeE0HTX4jipGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884650663419-lt6dhb7vp4pejenflbvmmsv371amnisj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
