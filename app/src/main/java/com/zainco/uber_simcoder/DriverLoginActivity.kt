@@ -20,7 +20,7 @@ class DriverLoginActivity : AppCompatActivity() {
         val user = mAuth.currentUser
         firebaseAuthListerner = FirebaseAuth.AuthStateListener { firebaseAuth ->
             user?.let {
-                startActivity(Intent(this, MapActivity::class.java))
+                startActivity(Intent(this, DriverMapActivity::class.java))
             }
         }
 
