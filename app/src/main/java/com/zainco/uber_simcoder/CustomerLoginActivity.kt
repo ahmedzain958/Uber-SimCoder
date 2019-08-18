@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_customer_login.*
+import kotlinx.android.synthetic.main.activity_driver_map.*
 
 class CustomerLoginActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
@@ -20,7 +21,7 @@ class CustomerLoginActivity : AppCompatActivity() {
         firebaseAuthListerner = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = mAuth.currentUser
             user?.let {
-                startActivity(Intent(this, MapActivity::class.java))
+                startActivity(Intent(this, CustomerMapActivity::class.java))
             }
         }
 
@@ -59,6 +60,7 @@ class CustomerLoginActivity : AppCompatActivity() {
                     }
                 }
         }
+
     }
 
     override fun onStart() {
