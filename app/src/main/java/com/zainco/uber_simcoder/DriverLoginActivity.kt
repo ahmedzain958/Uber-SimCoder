@@ -17,8 +17,8 @@ class DriverLoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_driver_login)
 
         mAuth = FirebaseAuth.getInstance()
-        val user = mAuth.currentUser
         firebaseAuthListerner = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val user = mAuth.currentUser
             user?.let {
                 startActivity(Intent(this, DriverMapActivity::class.java))
             }
@@ -34,6 +34,7 @@ class DriverLoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     else {
+                        val user = mAuth.currentUser
                         val uid = user!!.uid
                         FirebaseDatabase.getInstance().reference.child("Users")
                             .child("Drivers")
@@ -54,7 +55,7 @@ class DriverLoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     else {
-                        startActivity(Intent(this, MapActivity::class.java))
+                        startActivity(Intent(this, DriverMapActivity::class.java))
                     }
                 }
         }

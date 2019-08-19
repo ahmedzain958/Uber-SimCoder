@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
 import com.firebase.geofire.GeoFire
@@ -70,7 +69,6 @@ class CustomerMapActivity : FragmentActivity(), OnMapReadyCallback {
 
     var driverFound = false
     var radius = 1.0
-    var driverCount = 0
     lateinit var driverFoundId: String
 
     private fun getClosestDriver() {
@@ -94,39 +92,43 @@ class CustomerMapActivity : FragmentActivity(), OnMapReadyCallback {
                 if (!driverFound) {//called for every driver
                     driverFound = true
                     driverFoundId = key!!
-                    driverCount = driverCount.inc()
-                    mMap.addMarker(MarkerOptions().position(
-                        LatLng(location!!.latitude, location.longitude)
-                    ).title("driver no $driverCount"))
+                    //tell the drivers who the customer is ???
+                    //add customer to all the drivers in the radius, don't know why?
+                    val driverReference = FirebaseDatabase.getInstance().reference.child("Users")
+                        .child("Drivers")
+                        .child(driverFoundId)
+                    val customerId = FirebaseAuth.getInstance().currentUser!!.uid
+                    val map = mutableMapOf<String, Any?>()
+                    map["customerRideId"] = customerId
+                    driverReference.updateChildren(map)
+
+                    getDriverLocation()
+                    request.text = "Looking for driver location"
+
+
                 }
             }
 
             override fun onKeyMoved(key: String?, location: GeoLocation?) {
-                Toast.makeText(
-                    this@CustomerMapActivity,
-                    " sign up error",
-                    Toast.LENGTH_SHORT
-                ).show()
+                //no need
             }
 
             override fun onKeyExited(key: String?) {
-                Toast.makeText(
-                    this@CustomerMapActivity,
-                    " sign up error",
-                    Toast.LENGTH_SHORT
-                ).show()
+                //no need
+
             }
 
             override fun onGeoQueryError(error: DatabaseError?) {
-                Toast.makeText(
-                    this@CustomerMapActivity,
-                    " sign up error",
-                    Toast.LENGTH_SHORT
-                ).show()
+                //no need
+
             }
 
 
         })
+    }
+
+    private fun getDriverLocation() {
+
     }
 
     @SuppressLint("MissingPermission")
@@ -142,7 +144,7 @@ class CustomerMapActivity : FragmentActivity(), OnMapReadyCallback {
                 displayLocation(location)
             }
         //update location every second here
-        //2 choices for requestlocation u
+        //2 choices for request location u
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 super.onLocationResult(locationResult)

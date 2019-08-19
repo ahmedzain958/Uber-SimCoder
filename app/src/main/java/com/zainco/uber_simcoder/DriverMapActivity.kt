@@ -44,7 +44,7 @@ class DriverMapActivity : FragmentActivity(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     private fun buildLocationRequest() {
         locationRequest = LocationRequest()
-        locationRequest.interval = 2000//update every second
+        locationRequest.interval = 1000//update every second
         locationRequest.fastestInterval = 1000//update every second
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -61,17 +61,13 @@ class DriverMapActivity : FragmentActivity(), OnMapReadyCallback {
                 val location = locationResult!!.lastLocation
                 displayLocation(location)
                 val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                //for the updated location be uploaded every second in the database
                 val firebaseReference = FirebaseDatabase.getInstance().reference.child("driversavailable")
                 val geoFire = GeoFire(firebaseReference)
                 geoFire.setLocation(
                     userId,
                     GeoLocation(location.latitude, location.longitude)
                 ) { key, error ->
-                    Toast.makeText(
-                        this@DriverMapActivity,
-                        (key == userId).toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
         }, mainLooper)

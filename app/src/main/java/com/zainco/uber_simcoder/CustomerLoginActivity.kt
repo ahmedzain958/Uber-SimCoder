@@ -56,7 +56,7 @@ class CustomerLoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     else {
-                        startActivity(Intent(this, MapActivity::class.java))
+                        startActivity(Intent(this, CustomerMapActivity::class.java))
                     }
                 }
         }
